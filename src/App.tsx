@@ -4,9 +4,14 @@ import SingnIn from './pages/SingnIn'
 // import SingnUp from './pages/SingnUp'
 import GlobalStyle from './styles/global'
 
+import { AuthProvider } from './context/AuthContext'
+
 const App: React.FC = () => (
   <>
-    <SingnIn />
+    <AuthProvider>
+      <SingnIn />
+    </AuthProvider>
+
     <GlobalStyle />
   </>
 )
