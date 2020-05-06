@@ -60,7 +60,7 @@ const SingnIn: React.FC = () => {
 
           return
         }
-
+        // reacti18n para fazer internacionalização...
         addToast({
           type: 'error',
           title: 'Erro na autenticação',
