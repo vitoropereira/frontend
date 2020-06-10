@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Container,
   Header,
   HeaderContent,
   Profile,
-  NextAppointment,
+  Section,
   Contente,
   Schedule,
+  NextAppointment,
+  Appointment,
   Calendar
 } from './styles'
 
@@ -16,6 +18,7 @@ import { FiPower, FiClock } from 'react-icons/fi'
 import { useAuth } from '../../hooks/auth'
 
 const Dashboard: React.FC = () => {
+  const [ delectedDate, setSelectedDate] = useState(new Date())
   const { signOut, user } = useAuth();
 
 
@@ -66,6 +69,59 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointment>
+
+          <Section>
+            <strong>
+              Manhã
+            </strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars2.githubusercontent.com/u/47868559?s=460&u=f51880c6fc1b5497be94536b661b7d4321ebdd26&v=4"
+                  alt="Vitor Pereira"
+                />
+                <strong>Vitor Pereira</strong>
+              </div>
+
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars2.githubusercontent.com/u/47868559?s=460&u=f51880c6fc1b5497be94536b661b7d4321ebdd26&v=4"
+                  alt="Vitor Pereira"
+                />
+                <strong>Vitor Pereira</strong>
+              </div>
+
+            </Appointment>
+          </Section>
+
+          <Section>
+            <strong>
+              Tarde
+              </strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img
+                  src="https://avatars2.githubusercontent.com/u/47868559?s=460&u=f51880c6fc1b5497be94536b661b7d4321ebdd26&v=4"
+                  alt="Vitor Pereira"
+                />
+                <strong>Vitor Pereira</strong>
+              </div>
+            </Appointment>
+          </Section>
         </Schedule>
         <Calendar />
       </Contente>
