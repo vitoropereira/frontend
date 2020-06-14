@@ -45,6 +45,7 @@
       }
     ],
     "import/prefre-defaut-export": "off",
+    "import/no-duplicates": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",
