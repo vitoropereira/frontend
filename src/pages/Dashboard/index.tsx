@@ -21,6 +21,7 @@ import logo from '../../assets/logo.svg'
 import { FiPower, FiClock } from 'react-icons/fi'
 import { useAuth } from '../../hooks/auth'
 import api from '../../services/api'
+import { Link } from 'react-router-dom'
 
 
 interface MonthAvailabilityItem {
@@ -149,7 +150,7 @@ const Dashboard: React.FC = () => {
             />
             <div>
               <span>Bem-Vindo,</span>
-              <strong>{user.name}</strong>
+              <Link to="/profile"> <strong>{user.name}</strong></Link>
             </div>
           </Profile>
 
