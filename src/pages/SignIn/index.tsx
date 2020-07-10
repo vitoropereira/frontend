@@ -21,7 +21,7 @@ interface SingInFormData {
   password: string
 }
 
-const SingnIn: React.FC = () => {
+const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
 
   const { singIn } = useAuth()
@@ -95,4 +95,4 @@ const SingnIn: React.FC = () => {
 }
 
 
-export default SingnIn
+export default SignIn
