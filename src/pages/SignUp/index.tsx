@@ -24,7 +24,7 @@ interface SignUpFormData {
   password: string
 }
 
-const SignUp: React.FC = () => {
+const SingUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const { addToast } = useToast();
   const history = useHistory()
@@ -105,4 +105,4 @@ const SignUp: React.FC = () => {
   )
 }
 
-export default SignUp
+export default SingUp

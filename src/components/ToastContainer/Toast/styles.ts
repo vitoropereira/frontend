@@ -3,7 +3,7 @@ import { animated } from 'react-spring'
 
 interface ContainerToostProps {
   type?: 'success' | 'error' | 'info';
-  hasDescription: number;
+  hasDescription: boolean;
 }
 
 const toastTypeVariations = {

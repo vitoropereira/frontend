@@ -16,7 +16,7 @@ import Button from '../../components/Button'
 
 import { Container, Content, AnimationContainer, Background } from "./styles";
 
-interface SingnInFormData {
+interface SingInFormData {
   email: string,
   password: string
 }
@@ -30,7 +30,7 @@ const SingnIn: React.FC = () => {
   const history = useHistory()
 
   const handleSubmit = useCallback(
-    async (data: SingnInFormData) => {
+    async (data: SingInFormData) => {
       try {
         formRef.current?.setErrors({})
 
@@ -81,7 +81,7 @@ const SingnIn: React.FC = () => {
 
             <Button type="submit">Entrar</Button>
 
-            <Link to="/forgot-password">Esqueci minha Senha</Link>
+            <a href="forgot">Esqueci minha Senha</a>
           </Form>
           <Link to="/signup">
             <FiLogIn />
