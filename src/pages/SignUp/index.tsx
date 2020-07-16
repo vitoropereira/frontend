@@ -8,12 +8,8 @@ import { Link, useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-<<<<<<< HEAD
 import api from '../../services/api'
 import getValidationErrors from '../../utils/getValidationErrors'
-=======
-import getValidationsErrors from '../../utils/getValidationsErrors'
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
 
 import logoImg from '../../assets/logo.svg'
 
