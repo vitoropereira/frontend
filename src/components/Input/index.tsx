@@ -1,35 +1,34 @@
 import React, {
   InputHTMLAttributes,
-  useEffect,
   useRef,
+  useEffect,
+  useCallback,
   useState,
-  useCallback
 } from 'react'
+
 import { IconBaseProps } from 'react-icons'
-import { FiAlertCircle } from 'react-icons/fi'
-import { useField } from '@unform/core'
 
 import { Container, Error } from './styles'
+import { useField } from '@unform/core'
+import { FiAlertCircle } from 'react-icons/fi'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string,
-  icon?: React.ComponentType<IconBaseProps>,
+  name: string
+  containerStyle?: object
+  icon: React.ComponentType<IconBaseProps>
 }
 
-const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef<HTMLInputElement>(null)
+const Input: React.FC<InputProps> = ({
+  name,
+  containerStyle = {},
+  icon: Icon,
+  ...rest
+}) => {
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
-  const { fieldName, defaultValue, error, registerField } = useField(name)
 
-  const handleInputFocused = useCallback(() => {
-    setIsFocused(true)
-  }, [])
-
-  const handleInputBlur = useCallback(() => {
-    setIsFocused(false)
-    setIsFilled(!!inputRef.current?.value)
-  }, [])
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { fieldName, registerField, defaultValue, error } = useField(name)
 
   useEffect(() => {
     registerField({
@@ -37,16 +36,31 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
       ref: inputRef.current,
       path: 'value',
     })
-  }, [fieldName, registerField])
+  }, [fieldName, inputRef, registerField])
+
+  const handleFocus = useCallback(() => {
+    setIsFocused(true)
+  }, [])
+
+  const handleBlur = useCallback(() => {
+    setIsFocused(false)
+
+    setIsFilled(Boolean(inputRef.current?.value))
+  }, [])
 
   return (
-    <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
+    <Container
+      style={containerStyle}
+      hasError={Boolean(error)}
+      isFocused={isFocused}
+      isFilled={isFilled}
+    >
       {Icon && <Icon size={20} />}
       <input
-        onFocus={handleInputFocused}
-        onBlur={handleInputBlur}
-        defaultValue={defaultValue}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         ref={inputRef}
+        defaultValue={defaultValue}
         {...rest}
       />
 
