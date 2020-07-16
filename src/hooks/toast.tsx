@@ -30,7 +30,7 @@ const ToastProvider: React.FC = ({ children }) => {
       description
     }
 
-    setMessages((state) => [...state, toast])
+    setMessages((state) => [...state, toast]) // Sempre que passamos uma função para o useCallback ele retorna oldMessage = state)
   }, [])
 
   const removeToast = useCallback((id: string) => {

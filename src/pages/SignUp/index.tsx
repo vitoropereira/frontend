@@ -9,7 +9,7 @@ import api from '../../services/api'
 
 import { useToast } from '../../hooks/toast'
 
-import getValidadtionsErrors from '../../utils/getValidationErrors'
+import getValidationsErrors from '../../utils/getValidationsErrors'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -59,7 +59,7 @@ const SingUp: React.FC = () => {
 
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
-          const errors = getValidadtionsErrors(err)
+          const errors = getValidationsErrors(err)
 
           formRef.current?.setErrors(errors)
 
