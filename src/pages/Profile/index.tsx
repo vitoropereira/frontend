@@ -9,7 +9,7 @@ import api from '../../services/api'
 
 import { useToast } from '../../hooks/toast'
 
-import getValidationsErrors from '../../utils/getValidationsErrors'
+import getValidadtionsErrors from '../../utils/getValidationErrors'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -96,7 +96,7 @@ const Profile: React.FC = () => {
 
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
-          const errors = getValidationsErrors(err)
+          const errors = getValidadtionsErrors(err)
 
           formRef.current?.setErrors(errors)
 
