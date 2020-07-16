@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import { useToast } from '../../hooks/toast'
-import getValidadtionsErrors from '../../utils/getValidationErrors'
+import getValidationsErrors from '../../utils/getValidationsErrors'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -63,7 +63,7 @@ const ResetPassword: React.FC = () => {
         history.push('/')
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
-          const errors = getValidadtionsErrors(err)
+          const errors = getValidationsErrors(err)
 
           formRef.current?.setErrors(errors)
 

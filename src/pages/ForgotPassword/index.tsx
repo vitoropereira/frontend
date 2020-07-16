@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { Link } from 'react-router-dom'
 
 import { useToast } from '../../hooks/toast'
-import getValidadtionsErrors from '../../utils/getValidationErrors'
+import getValidationsErrors from '../../utils/getValidationsErrors'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -42,8 +42,6 @@ const ForgotPassword: React.FC = () => {
           abortEarly: false
         })
 
-
-
         await api.post('/password/forgot', {
           email: data.email
         })
@@ -56,7 +54,7 @@ const ForgotPassword: React.FC = () => {
 
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
-          const errors = getValidadtionsErrors(err)
+          const errors = getValidationsErrors(err)
 
           formRef.current?.setErrors(errors)
 
@@ -66,7 +64,7 @@ const ForgotPassword: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro na recuperação de senha',
-          description: 'Ocorreu um erro ao tentar realizar a recuperação de senha, tente noavamete.',
+          description: 'Ocorreu um erro ao tentar realizar a recuperação de senha, tente novamente.',
         })
       } finally {
         setLoading(false)
