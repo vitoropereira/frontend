@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/auth'
 import { useToast } from '../../hooks/toast'
-import getValidationsErrors from '../../utils/getValidationsErrors'
+import getValidadtionsErrors from '../../utils/getValidationErrors'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -21,7 +21,7 @@ interface SingInFormData {
   password: string
 }
 
-const SignIn: React.FC = () => {
+const SingnIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
 
   const { singIn } = useAuth()
@@ -36,7 +36,7 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .required('E-mail obrigatório.')
+            .required('E-mail obrigatorio.')
             .email('Digite um e-mail valido.'),
           password: Yup.string().required('Senha obrigatória.')
         })
@@ -54,7 +54,7 @@ const SignIn: React.FC = () => {
 
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
-          const errors = getValidationsErrors(err)
+          const errors = getValidadtionsErrors(err)
 
           formRef.current?.setErrors(errors)
 
@@ -95,4 +95,4 @@ const SignIn: React.FC = () => {
 }
 
 
-export default SignIn
+export default SingnIn
