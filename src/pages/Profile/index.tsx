@@ -5,20 +5,11 @@ import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import { useHistory, Link } from 'react-router-dom'
 
-<<<<<<< HEAD
-=======
-import api from '../../services/api'
-
-import { useToast } from '../../hooks/toast'
-
-import getValidationsErrors from '../../utils/getValidationsErrors'
-
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 import api from '../../services/api'
-import getValidationErrors from '../../utils/getValidationErrors'
+import getValidationsErrors from '../../utils/getValidationsErrors'
 
 import { Container, Content, AvatarInput } from './styles'
 import { useToast } from '../../hooks/toast'
@@ -101,16 +92,9 @@ const Profile: React.FC = () => {
           title: 'Profile updated!',
           description: 'Your profile changes were successfully applied',
         })
-<<<<<<< HEAD
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error)
-=======
-
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidationsErrors(err)
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
+          const errors = getValidationsErrors(error)
 
           formRef.current?.setErrors(errors)
 

@@ -10,12 +10,8 @@ import Button from '../../components/Button'
 
 import { useAuth } from '../../hooks/auth'
 import { useToast } from '../../hooks/toast'
-<<<<<<< HEAD
-=======
-import getValidationsErrors from '../../utils/getValidationsErrors'
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
 
-import getValidationErrors from '../../utils/getValidationErrors'
+import getValidationsErrors from '../../utils/getValidationsErrors'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -40,15 +36,9 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-<<<<<<< HEAD
             .required('E-mail is required')
             .email('Type your e-mail address'),
           password: Yup.string().required('Type your password'),
-=======
-            .required('E-mail obrigatório.')
-            .email('Digite um e-mail valido.'),
-          password: Yup.string().required('Senha obrigatória.')
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
         })
 
         await schema.validate(data, { abortEarly: false })
@@ -59,16 +49,9 @@ const SignIn: React.FC = () => {
         })
 
         history.push('/dashboard')
-<<<<<<< HEAD
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error)
-=======
-
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidationsErrors(err)
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
+          const errors = getValidationsErrors(error)
 
           formRef.current?.setErrors(errors)
 
@@ -125,8 +108,4 @@ const SignIn: React.FC = () => {
   )
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
 export default SignIn
