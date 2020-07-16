@@ -9,7 +9,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 import api from '../../services/api'
-import getValidationErrors from '../../utils/getValidationErrors'
+import getValidationsErrors from '../../utils/getValidationsErrors'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -56,16 +56,9 @@ const SignUp: React.FC = () => {
           title: 'Signed up!',
           description: 'Now you are able to login!',
         })
-<<<<<<< HEAD
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error)
-=======
-
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidationsErrors(err)
->>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
+          const errors = getValidationsErrors(error)
 
           formRef.current?.setErrors(errors)
 
