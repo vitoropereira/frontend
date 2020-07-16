@@ -9,6 +9,10 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 import { useToast } from '../../hooks/toast'
+<<<<<<< HEAD
+=======
+import getValidationsErrors from '../../utils/getValidationsErrors'
+>>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
 
 import getValidationErrors from '../../utils/getValidationErrors'
 
@@ -64,9 +68,15 @@ const ResetPassword: React.FC = () => {
         })
 
         history.push('/')
+<<<<<<< HEAD
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error)
+=======
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationsErrors(err)
+>>>>>>> 3128c513ee5eda53f19ebcf3f09189881253ef7d
 
           formRef.current?.setErrors(errors)
 
