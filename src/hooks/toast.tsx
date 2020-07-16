@@ -1,36 +1,39 @@
-import React, { createContext, useCallback, useContext, useState } from 'react'
+import React, { createContext, useContext, useCallback, useState } from 'react'
+
 import { uuid } from 'uuidv4'
 
 import ToastContainer from '../components/ToastContainer'
 
 export interface ToastMessage {
-  id: string,
-  type?: 'success' | 'error' | 'info',
-  title: string,
+  id: string
+  type?: 'info' | 'success' | 'error'
+  title: string
   description?: string
 }
 
-interface ToastConsteData {
-  addToast(message: Omit<ToastMessage, 'id'>): void,
+interface ToastContextData {
+  addToast(message: Omit<ToastMessage, 'id'>): void
   removeToast(id: string): void
 }
 
-const ToastContext = createContext<ToastConsteData>({} as ToastConsteData)
+const ToastContext = createContext<ToastContextData>({} as ToastContextData)
 
 const ToastProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = useState<ToastMessage[]>([])
 
-  const addToast = useCallback(({ type, title, description }: Omit<ToastMessage, 'id'>) => {
+  const addToast = useCallback((message: Omit<ToastMessage, 'id'>) => {
     const id = uuid()
+
+    const { type, title, description } = message
 
     const toast = {
       id,
       type,
       title,
-      description
+      description,
     }
 
-    setMessages((state) => [...state, toast]) // Sempre que passamos uma função para o useCallback ele retorna oldMessage = state)
+    setMessages(state => [...state, toast])
   }, [])
 
   const removeToast = useCallback((id: string) => {
@@ -39,18 +42,17 @@ const ToastProvider: React.FC = ({ children }) => {
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
-
       {children}
       <ToastContainer messages={messages} />
     </ToastContext.Provider>
   )
 }
 
-function useToast(): ToastConsteData {
+function useToast(): ToastContextData {
   const context = useContext(ToastContext)
 
   if (!context) {
-    throw new Error('useToast must be used within a ToastProvider.')
+    throw new Error('useToast must be used within a ToastProvider')
   }
 
   return context
