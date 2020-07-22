@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, wait } from '@testing-library/react'
-import SingIn from '../../pages/SingIn'
+import SignIn from '../../pages/SignIn'
 
 const mockedHistoryPush = jest.fn()
 const mockedSignIn = jest.fn()
@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => {
 jest.mock('../../hooks/auth', () => {
   return {
     useAuth: () => ({
-      singIn: mockedSignIn
+      signIn: mockedSignIn
     })
   }
 })
@@ -32,13 +32,13 @@ jest.mock('../../hooks/toast', () => {
   }
 })
 
-describe('singIn Page', () => {
+describe('Sign in Page', () => {
   beforeEach(() => {
     mockedHistoryPush.mockClear()
   })
 
   it('should be able to sign in', async () => {
-    const { getByPlaceholderText, getByText } = render(<SingIn />)
+    const { getByPlaceholderText, getByText } = render(<SignIn />)
 
     const emailField = getByPlaceholderText('E-mail')
     const passwordField = getByPlaceholderText('Password')
@@ -55,7 +55,7 @@ describe('singIn Page', () => {
   })
 
   it('should not be able to sign in with invalid credentials', async () => {
-    const { getByPlaceholderText, getByText } = render(<SingIn />)
+    const { getByPlaceholderText, getByText } = render(<SignIn />)
 
     const emailField = getByPlaceholderText('E-mail')
     const passwordField = getByPlaceholderText('Password')
@@ -79,7 +79,7 @@ describe('singIn Page', () => {
     jest.mock('../../hooks/auth', () => {
       return {
         useAuth: () => ({
-          singIn: () => {
+          signIn: () => {
             throw new Error()
           }
         })
@@ -88,7 +88,7 @@ describe('singIn Page', () => {
 
 
 
-    const { getByPlaceholderText, getByText } = render(<SingIn />)
+    const { getByPlaceholderText, getByText } = render(<SignIn />)
 
     const emailField = getByPlaceholderText('E-mail')
     const passwordField = getByPlaceholderText('Password')

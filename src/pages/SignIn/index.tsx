@@ -17,20 +17,20 @@ import getValidationsErrors from '../../utils/getValidationsErrors'
 import logoImg from '../../assets/logo.svg'
 
 
-interface singInFormData {
+interface SignInFormData {
   email: string
   password: string
 }
 
-const SingIn: React.FC = () => {
+const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
 
-  const { singIn } = useAuth()
+  const { signIn } = useAuth()
   const { addToast } = useToast()
   const history = useHistory()
 
   const handleSubmit = useCallback(
-    async (data: singInFormData): Promise<void> => {
+    async (data: SignInFormData): Promise<void> => {
       try {
         formRef.current?.setErrors({})
 
@@ -43,7 +43,7 @@ const SingIn: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false })
 
-        await singIn({
+        await signIn({
           email: data.email,
           password: data.password,
         })
@@ -66,7 +66,7 @@ const SingIn: React.FC = () => {
         })
       }
     },
-    [singIn, addToast, history],
+    [signIn, addToast, history],
   )
 
   return (
@@ -108,4 +108,4 @@ const SingIn: React.FC = () => {
   )
 }
 
-export default SingIn
+export default SignIn

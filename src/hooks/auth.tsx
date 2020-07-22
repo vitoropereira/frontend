@@ -14,13 +14,13 @@ interface AuthState {
   user: User
 }
 
-interface singInCredentials {
+interface SignInCredentials {
   email: string
   password: string
 }
 
 interface AuthContextData {
-  singIn: (credentials: singInCredentials) => Promise<void>
+  signIn: (credentials: SignInCredentials) => Promise<void>
   signOut: () => void
   updateUser: (user: User) => void
   user: User
@@ -42,7 +42,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState
   })
 
-  const singIn = useCallback(async ({ email, password }) => {
+  const signin = useCallback(async ({ email, password }) => {
     const response = await api.post<AuthState>('sessions', {
       email,
       password,
@@ -79,7 +79,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ singIn, signOut, updateUser, user: data.user }}
+      value={{ signIn, signOut, updateUser, user: data.user }}
     >
       {children}
     </AuthContext.Provider>
