@@ -1,24 +1,25 @@
-import React, { useRef, useCallback } from 'react'
-import { FiLock } from "react-icons/fi";
-import { FormHandles } from '@unform/core'
+import React, { useCallback, useRef } from 'react'
+import { FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
+import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import { useHistory, useLocation } from 'react-router-dom'
-
-import { useToast } from '../../hooks/toast'
-import getValidadtionsErrors from '../../utils/getValidationErrors'
-
-import logoImg from '../../assets/logo.svg'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-import { Container, Content, AnimationContainer, Background } from "./styles";
-import api from '../../services/api';
+import { useToast } from '../../hooks/toast'
+
+import getValidationsErrors from '../../utils/getValidationsErrors'
+
+import logoImg from '../../assets/logo.svg'
+
+import { Container, Background, Content, AnimationContainer } from './styles'
+import api from '../../services/api'
 
 interface ResetPasswordFormData {
   password: string
-  password_confirmation: string
+  passwordConfirmation: string
 }
 
 const ResetPassword: React.FC = () => {
@@ -27,26 +28,27 @@ const ResetPassword: React.FC = () => {
   const { addToast } = useToast()
 
   const history = useHistory()
+
   const location = useLocation()
 
   const handleSubmit = useCallback(
-    async (data: ResetPasswordFormData) => {
+    async (data: ResetPasswordFormData): Promise<void> => {
       try {
         formRef.current?.setErrors({})
 
         const schema = Yup.object().shape({
-          password: Yup.string().required('Senha obrigatória.'),
-          password_confirmation: Yup.string().oneOf(
+          password: Yup.string().required('Type your password'),
+          passwordConfirmation: Yup.string().oneOf(
             [Yup.ref('password'), null],
-            'Confirmação de senha incorreta.'
-          )
+            'Incorrect password confirmation',
+          ),
         })
 
         await schema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
         })
 
-        const { password, password_confirmation } = data
+        const { password, passwordConfirmation } = data
 
         const token = location.search.replace('?token=', '')
 
@@ -56,51 +58,56 @@ const ResetPassword: React.FC = () => {
 
         await api.post('/password/reset', {
           password,
-          password_confirmation,
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          password_confirmation: passwordConfirmation,
           token,
         })
 
         history.push('/')
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidadtionsErrors(err)
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationsErrors(error)
 
           formRef.current?.setErrors(errors)
 
           return
         }
-        // reacti18n para fazer internacionalização...
+
         addToast({
           type: 'error',
-          title: 'Erro ao resetar senha.',
-          description: 'Ocorreu um erro ao resetar sua senha, tente novamente.',
+          title: 'Reset password error',
+          description:
+            'There was an error while trying to reset your password, please try again',
         })
       }
-    }, [addToast, history, location.search])
+    },
+    [addToast, history, location],
+  )
 
   return (
     <Container>
       <Content>
         <AnimationContainer>
           <img src={logoImg} alt="GoBarber" />
+
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Resetar Senha</h1>
+            <h1>Reset Password</h1>
+
             <Input
               name="password"
               type="password"
+              placeholder="New password"
               icon={FiLock}
-              placeholder="Nova Senha"
             />
 
             <Input
-              name="password_confirmation"
+              name="passwordConfirmation"
               type="password"
+              placeholder="Password confirmation"
               icon={FiLock}
-              placeholder="Confirmação da senha"
             />
 
-            <Button type="submit">Alterar Senha</Button>
-
+            <Button type="submit">Change password</Button>
           </Form>
         </AnimationContainer>
       </Content>
@@ -108,6 +115,5 @@ const ResetPassword: React.FC = () => {
     </Container>
   )
 }
-
 
 export default ResetPassword
